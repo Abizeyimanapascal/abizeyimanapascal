@@ -12,7 +12,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <Navbar />
-        Hello World app
+        Hello World app1
         <Footer />
       </div>
     );
