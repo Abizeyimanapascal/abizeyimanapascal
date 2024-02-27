@@ -2,8 +2,55 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-color: #d7f0fd;
+  background-color: #f0f0f9;
+  opacity: 0.9;
 }
-.left-side{
-  width: ;
+.p-color{
+  background: rgb(0, 43, 81);
+}
+
+.header {
+  background: rgb(0, 43, 81);
+}
+
+.navbar {
+  background: rgb(25, 65, 101);
+  color: white;
+}
+
+.book-table-div {
+  width: 80%;
+  margin-left: 10%;
+  overflow-x: auto;
+}
+.book-table {
+  width:100%;
+}
+.book-table thead{
+  background: rgb(25, 65, 101);
+  color: white;
+  height: 40px;
+}
+.book-table tr{
+  border-bottom: 1px solid #b6b6f4;
+}
+.nav-a {
+  text-decoration: none;
+  color: white;
+}
+
+#myCarousel {
+  height: 600px;
+}
+.carousel-inner{
+  height: 100%;
+  background: red;
+}
+.carousel-item{
+  height: 100%;
+  background: rgb(17, 255, 0);
+}
+.signup-btn{
+  color:  rgb(0, 43, 81);
+  cursor: pointer;
 }

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Navbar() {
     return (
         <div>
-            <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark">
+            <nav class="navbar navbar-expand-md navbar-dark shadow">
 
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,11 +14,15 @@ function Navbar() {
 
                     <div className='col-4'>
                         <ul class="navbar-nav justify-content-center">
+                            
                             <li class="nav-item mx-4">
-                                <Link to="/"> Home</Link>
+                                <Link to="/Home" className='nav-a'>Home</Link>
                             </li>
                             <li class="nav-item  mx-4">
-                            <Link to="/Books"> Books</Link>
+                            <Link to="/Admin" className='nav-a'>Admin</Link>
+                            </li>
+                            <li class="nav-item  mx-4">
+                            <Link to="/Dashboard" className='nav-a'>Dashboard<div class="badge badge bg-danger">7</div></Link>
                             </li>
                         </ul>
                     </div>

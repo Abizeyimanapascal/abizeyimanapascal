@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
-import Books from './pages/Books';
+import Home from './pages/Home';
+import Admin from './pages/Admin';
 
 import {
   createBrowserRouter,
@@ -16,9 +17,14 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "Books",
-    element: <Books />,
+    path: "Home",
+    element: <Home />,
   },
+  {
+    path: "Admin",
+    element: <Admin />,
+  },
+  
 ]);
 
 ReactDOM.render(
