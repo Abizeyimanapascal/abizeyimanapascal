@@ -1,11 +1,29 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
+import Axios from 'axios';
 import logo from './logo.svg';
 import './App.css';
 import { Link } from "react-router-dom";
 import Footer from './components/Footer';
 
-class App extends Component {
-  render() {
+function App(){
+
+    const [firstname, setFirstname] = useState("");
+    const [lastname, setLastname] = useState("");
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const submituser = () => {
+      Axios.post('http://localhost:3001/api/adduser', {
+        Firstname: firstname,
+        Lastname: lastname,
+        Username: username,
+        Email: email,
+        Password: password,
+      }).then(() => {
+        alert('User Added');
+      });
+    };
+
     return (
       <div>
         <div class="p-3 border-bottom header shadow">
@@ -85,6 +103,10 @@ class App extends Component {
 
 
 
+
+
+
+
         <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="signinoffcanvas" aria-labelledby="offcanvasScrollingLabel">
           <div class="offcanvas-header p-color text-light p-4">
             <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Sign in here</h5>
@@ -111,13 +133,95 @@ class App extends Component {
                 </label>
               </div>
               <Link to="/Home" className='nav-a btn p-color w-100 py-2'>Sign in</Link>
-              <p class="mt-5 mb-3 text-body-secondary">Don't have Account? <b><span class="signup-btn">Sign up</span></b></p>
+              <p class="mt-5 mb-3 text-body-secondary">Don't have Account? <b><span class="signup-btn btn" data-bs-toggle="modal" data-bs-target="#signupmodal">Sign up</span></b></p>
             </form>
           </div>
         </div>
+
+
+
+
+
+
+        <div class="modal modal-lg fade" id="signupmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header p-color text-light">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Sign up form</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form class="row g-3 needs-validation" novalidate>
+                  <div class="col-md-4">
+                    <label for="validationCustom01" class="form-label">First name</label>
+                    <input type="text" name="Firstname" onChange={(e) => { setFirstname(e.target.value) }} class="form-control" id="validationCustom01" />
+                    <div class="valid-feedback">
+                      Looks good!
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="validationCustom02" class="form-label">Last name</label>
+                    <input type="text" name="Lastname" onChange={(e) => { setLastname(e.target.value) }} class="form-control" id="validationCustom02" />
+                    <div class="valid-feedback">
+                      Looks good!
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="validationCustomUsername" class="form-label">Username</label>
+                    <div class="input-group has-validation">
+                      <span class="input-group-text" id="inputGroupPrepend">@</span>
+                      <input type="text" name="Username" onChange={(e) => { setUsername(e.target.value) }} class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" />
+                      <div class="invalid-feedback">
+                        Please choose a username.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="validationCustom03" class="form-label">e-mail</label>
+                    <input type="text" name="Email" onChange={(e) => { setEmail(e.target.value) }} class="form-control" id="validationCustom03" />
+                    <div class="invalid-feedback">
+                      Please provide a valid city.
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="validationCustom05" class="form-label">Password</label>
+                    <input type="text" name="Password" onChange={(e) => { setPassword(e.target.value) }} class="form-control" id="validationCustom05" />
+                    <div class="invalid-feedback">
+                      Please provide a valid zip.
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="validationCustom05" class="form-label">Connfirm</label>
+                    <input type="text" class="form-control" id="validationCustom05" />
+                    <div class="invalid-feedback">
+                      Please provide a valid zip.
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="invalidCheck" />
+                      <label class="form-check-label" for="invalidCheck">
+                        Agree to terms and conditions
+                      </label>
+                      <div class="invalid-feedback">
+                        You must agree before submitting.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <button class="btn btn-primary" type="submit" onClick={submituser}>Submit form</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
       </div>
     );
   }
-}
 
 export default App;

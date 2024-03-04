@@ -22,7 +22,7 @@ function Navbar() {
                             <Link to="/Admin" className='nav-a'>Admin</Link>
                             </li>
                             <li class="nav-item  mx-4">
-                            <Link to="/Dashboard" className='nav-a'>Dashboard<div class="badge badge bg-danger">7</div></Link>
+                            <Link to="/Dashboard" className='nav-a'>Dashboard</Link>
                             </li>
                         </ul>
                     </div>

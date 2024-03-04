@@ -4,6 +4,7 @@ import App from './App';
 import './index.css';
 import Home from './pages/Home';
 import Admin from './pages/Admin';
+import Dashboard from './pages/Dashboard';
 
 import {
   createBrowserRouter,
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "Admin",
     element: <Admin />,
+  },
+  {
+    path: "Dashboard",
+    element: <Dashboard />,
   },
   
 ]);
