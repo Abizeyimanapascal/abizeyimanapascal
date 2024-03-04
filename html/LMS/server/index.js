@@ -65,3 +65,28 @@ app.delete('/api/deleteuser/:id', (req, res) => {
     })
 })
 
+
+
+app.post('/api/addbook', (req, res) => {
+   const sqladdbook = "INSERT INTO books (booktitle,bookisbn,bookgenre,booknumber,publisheddate,bookauthor,bookdescription) VALUES (?,?,?,?,?,?,?)";
+   db.query(sqladdbook, [req.body.title, req.body.isbn, req.body.genre, req.body.bookNumber, req.body.publishedDate, req.body.author, req.body.description], (err, result) => {
+    if (err) {
+        console.error("Error adding book:", err);
+        return res.status(500).json({ error: "Internal Server Error" });
+    } else {
+        console.log(result);
+        return res.status(200).json({ message: "Book added successfully", redirect: '../'  });
+    }
+   })
+})
+
+app.get('/api/getbooks', (req, res) => {
+  const sqlgetbooks = "SELECT * FROM books";
+  db.query(sqlgetbooks, (err, result) => {
+    if (err) {
+        console.log("Error getting books:", err);
+    } else {
+        res.send(result);
+    }
+  });
+})

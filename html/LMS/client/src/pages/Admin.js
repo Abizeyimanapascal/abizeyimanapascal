@@ -13,7 +13,7 @@ function Admin() {
       setUsersList(response.data);
     });
   }, []);
-   
+
 
 
   const deleteuser = (Id) => {
@@ -22,6 +22,34 @@ function Admin() {
     });
   }
 
+  const [Title, setBookTitle] = useState("");
+  const [Isbn, setIsbn] = useState("");
+  const [BookNumber, setBookNumber] = useState("");
+  const [PublishedDate, setPublishedDate] = useState("");
+  const [Author, setBookAuthor] = useState("");
+  const [Genre, setBookGenre] = useState("");
+  const [Description, setDescription] = useState("");
+  const addbook = () => {
+
+    Axios.post('http://localhost:3001/api/addbook', {
+      title: Title,
+      isbn: Isbn,
+      bookNumber: BookNumber,
+      publishedDate: PublishedDate,
+      author: Author,
+      genre: Genre,
+      description: Description,
+    }).then(() => {
+      alert('Book Added');
+    });
+  };
+
+  const [booksList, setBooksList] = useState([]);
+  useEffect(() => {
+    Axios.get('http://localhost:3001/api/getbooks').then((response) => {
+      setBooksList(response.data)
+    });
+  }, []);
   return (
     <div>
       <Header />
@@ -54,7 +82,9 @@ function Admin() {
                 <p>This is some placeholder content the <strong>Home tab's</strong> associated content. Clicking
                   another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to
                   control the content visibility and styling. You can use it with tabs, pills, and any other
-                  <code>.nav</code>-powered navigation.</p>
+                  <code>.nav</code>-powered navigation.</p><br />
+
+                <button type="button" className='btn btn-lg p-color' data-bs-toggle="modal" data-bs-target="#addbookmodal">Add Book</button>
               </div>
 
               <div class="tab-pane fade" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab">
@@ -110,40 +140,37 @@ function Admin() {
                   <table class="shadow book-table rounded">
                     <thead>
                       <tr class="text-warning rounded text-light">
-                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
                         <th scope="col">Book Title</th>
                         <th scope="col">ISBN</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Number</th>
+                        <th scope="col">Published Date</th>
                         <th scope="col">Author</th>
+                        <th scope="col">Description</th>
                         <th scope="col" colSpan="3">Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td style={{ width: "30px" }}><i class="fa-solid fa-circle-info text-secondary"></i></td>
-                        <td style={{ width: "30px" }}><i class="fa-solid fa-pen-to-square text-primary"></i></td>
-                        <td style={{ width: "30px" }}><i class="fa-solid fa-trash-can text-danger"></i></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        <td style={{ width: "30px" }}><i class="fa-solid fa-circle-info text-secondary"></i></td>
-                        <td style={{ width: "30px" }}><i class="fa-solid fa-pen-to-square text-primary"></i></td>
-                        <td style={{ width: "30px" }}><i class="fa-solid fa-trash-can text-danger"></i></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
-                        <td style={{ width: "30px" }}><i class="fa-solid fa-circle-info text-secondary"></i></td>
-                        <td style={{ width: "30px" }}><i class="fa-solid fa-pen-to-square text-primary"></i></td>
-                        <td style={{ width: "30px" }}><i class="fa-solid fa-trash-can text-danger"></i></td>
-                      </tr>
+                      {
+                        booksList.map((book) => {
+                          return (
+                          <tr>
+                            <th scope="row">{book.id}</th>
+                            <td>{book.booktitle}</td>
+                            <td>{book.bookisbn}</td>
+                            <td>{book.bookgenre}</td>
+                            <td>{book.booknumber}</td>
+                            <td>{book.publisheddate}</td>
+                            <td>{book.bookauthor}</td>
+                            <td>{book.description}</td>
+                            <td style={{ width: "30px" }}><i class="fa-solid fa-circle-info text-secondary"></i></td>
+                            <td style={{ width: "30px" }}><i class="fa-solid fa-pen-to-square text-primary"></i></td>
+                            <td style={{ width: "30px" }}><i class="fa-solid fa-trash-can text-danger"></i></td>
+                          </tr>
+                          )
+                        })
+                      }
                     </tbody>
                   </table>
                 </div>
@@ -208,79 +235,162 @@ function Admin() {
 
 
 
-              <div class="modal modal-lg fade" id="signupmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
-                <div class="modal-dialog" >
-                  <div class="modal-content">
-                    <div class="modal-header p-color text-light">
-                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Sign up form</h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <form class="row g-3 needs-validation" novalidate>
-                        <div class="col-md-4">
-                          <label for="validationCustom01" class="form-label">First name</label>
-                          <input type="text" name="Firstname" onChange={(e) => { setFirstname(e.target.value) }} class="form-control" id="validationCustom01" />
-                          <div class="valid-feedback">
-                            Looks good!
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <label for="validationCustom02" class="form-label">Last name</label>
-                          <input type="text" name="Lastname" onChange={(e) => { setLastname(e.target.value) }} class="form-control" id="validationCustom02" />
-                          <div class="valid-feedback">
-                            Looks good!
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <label for="validationCustomUsername" class="form-label">Username</label>
-                          <div class="input-group has-validation">
-                            <span class="input-group-text" id="inputGroupPrepend">@</span>
-                            <input type="text" name="Username" onChange={(e) => { setUsername(e.target.value) }} class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" />
-                            <div class="invalid-feedback">
-                              Please choose a username.
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <label for="validationCustom03" class="form-label">e-mail</label>
-                          <input type="text" name="Email" onChange={(e) => { setEmail(e.target.value) }} class="form-control" id="validationCustom03" />
-                          <div class="invalid-feedback">
-                            Please provide a valid city.
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <label for="validationCustom05" class="form-label">Password</label>
-                          <input type="text" name="Password" onChange={(e) => { setPassword(e.target.value) }} class="form-control" id="validationCustom05" />
-                          <div class="invalid-feedback">
-                            Please provide a valid zip.
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <label for="validationCustom05" class="form-label">Connfirm</label>
-                          <input type="text" class="form-control" id="validationCustom05" />
-                          <div class="invalid-feedback">
-                            Please provide a valid zip.
-                          </div>
-                        </div>
-                        <div class="col-12">
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" />
-                            <label class="form-check-label" for="invalidCheck">
-                              Agree to terms and conditions
-                            </label>
-                            <div class="invalid-feedback">
-                              You must agree before submitting.
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-12">
-                          <button class="btn btn-primary" type="submit">Submit form</button>
-                        </div>
-                      </form>
+        <div class="modal modal-lg fade" id="signupmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header p-color text-light">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Sign up form</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form class="row g-3 needs-validation" novalidate>
+                  <div class="col-md-4">
+                    <label for="validationCustom01" class="form-label">First name</label>
+                    <input type="text" name="Firstname" onChange={(e) => { setFirstname(e.target.value) }} class="form-control" id="validationCustom01" />
+                    <div class="valid-feedback">
+                      Looks good!
                     </div>
                   </div>
-                </div>
+                  <div class="col-md-4">
+                    <label for="validationCustom02" class="form-label">Last name</label>
+                    <input type="text" name="Lastname" onChange={(e) => { setLastname(e.target.value) }} class="form-control" id="validationCustom02" />
+                    <div class="valid-feedback">
+                      Looks good!
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="validationCustomUsername" class="form-label">Username</label>
+                    <div class="input-group has-validation">
+                      <span class="input-group-text" id="inputGroupPrepend">@</span>
+                      <input type="text" name="Username" onChange={(e) => { setUsername(e.target.value) }} class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" />
+                      <div class="invalid-feedback">
+                        Please choose a username.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="validationCustom03" class="form-label">e-mail</label>
+                    <input type="text" name="Email" onChange={(e) => { setEmail(e.target.value) }} class="form-control" id="validationCustom03" />
+                    <div class="invalid-feedback">
+                      Please provide a valid city.
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="validationCustom05" class="form-label">Password</label>
+                    <input type="text" name="Password" onChange={(e) => { setPassword(e.target.value) }} class="form-control" id="validationCustom05" />
+                    <div class="invalid-feedback">
+                      Please provide a valid zip.
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="validationCustom05" class="form-label">Connfirm</label>
+                    <input type="text" class="form-control" id="validationCustom05" />
+                    <div class="invalid-feedback">
+                      Please provide a valid zip.
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="invalidCheck" />
+                      <label class="form-check-label" for="invalidCheck">
+                        Agree to terms and conditions
+                      </label>
+                      <div class="invalid-feedback">
+                        You must agree before submitting.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <button class="btn btn-primary" type="submit">Submit form</button>
+                  </div>
+                </form>
               </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+        <div class="modal modal-lg fade" id="addbookmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header p-color text-light">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Book form</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form class="row g-3 needs-validation" novalidate>
+                  <div class="col-md-6">
+                    <label for="validationCustom01" class="form-label">Book Title</label>
+                    <input type="text" name="booktitle" onChange={(e) => { setBookTitle(e.target.value) }} class="form-control" id="validationCustom01" required />
+                    <div class="valid-feedback">
+                      Looks good!
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="validationCustom02" class="form-label">ISBN</label>
+                    <input type="text" name="bookisbn" onChange={(e) => { setIsbn(e.target.value) }} class="form-control" id="validationCustom02" required />
+                    <div class="valid-feedback">
+                      Looks good!
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="validationCustomUsername" class="form-label">Book Genre</label>
+                    <input type="text" name="bookgenre" onChange={(e) => { setBookGenre(e.target.value) }} class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required />
+                    <div class="invalid-feedback">
+                      Please choose a username.
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="validationCustom03" class="form-label">Book Number</label>
+                    <input type="number" name="booknumber" onChange={(e) => { setBookNumber(e.target.value) }} class="form-control" id="validationCustom03" required />
+                    <div class="invalid-feedback">
+                      Please provide a valid city.
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="validationCustom05" class="form-label">Published Date</label>
+                    <input type="date" name="publisheddate" onChange={(e) => { setPublishedDate(e.target.value) }} class="form-control" id="validationCustom05" required />
+                    <div class="invalid-feedback">
+                      Please provide a valid zip.
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="validationCustom05" class="form-label">Book Author</label>
+                    <input type="text" name="bookauthor" onChange={(e) => { setBookAuthor(e.target.value) }} class="form-control" id="validationCustom05" required />
+                    <div class="invalid-feedback">
+                      Please provide a valid zip.
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="validationCustom05" class="form-label">Description</label>
+                    <textarea name="description" onChange={(e) => { setDescription(e.target.value) }} class="form-control" id="validationCustom05" required />
+                    <div class="invalid-feedback">
+                      Please provide a valid zip.
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required />
+                      <label class="form-check-label" for="invalidCheck">
+                        Agree to terms and conditions
+                      </label>
+                      <div class="invalid-feedback">
+                        You must agree before submitting.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <button class="btn p-color" type="submit" onClick={() => { confirm('Do you want to add this book?'), addbook() }}>Add Book</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
 
 
 
