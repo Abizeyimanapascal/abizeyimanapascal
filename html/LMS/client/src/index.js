@@ -5,11 +5,9 @@ import './index.css';
 import Home from './pages/Home';
 import Admin from './pages/Admin';
 import Dashboard from './pages/Dashboard';
+import Updatebook from './pages/Updatebook';
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter,RouterProvider } from "react-router-dom";
 
 
 const router = createBrowserRouter([
@@ -29,6 +27,10 @@ const router = createBrowserRouter([
     path: "Dashboard",
     element: <Dashboard />,
   },
+  {
+    path: "/Updatebook/:id",
+    element: <Updatebook />,
+  }
   
 ]);
 

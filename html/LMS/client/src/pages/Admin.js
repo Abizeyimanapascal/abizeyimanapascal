@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from "react-router-dom";
 import Axios from 'axios';
 import Mainlayout from '../components/Mainlayout';
 import Header from '../components/Header';
@@ -6,11 +7,14 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 function Admin() {
-
+  const [booksList, setBooksList] = useState([]);
   const [usersList, setUsersList] = useState([]);
+  const [bookList, setBookList] = useState([]);
   useEffect(() => {
     Axios.get('http://localhost:3001/api/getusers').then((response) => {
       setUsersList(response.data);
+    }).catch((error) => {
+      console.log(error);
     });
   }, []);
 
@@ -44,12 +48,45 @@ function Admin() {
     });
   };
 
-  const [booksList, setBooksList] = useState([]);
   useEffect(() => {
     Axios.get('http://localhost:3001/api/getbooks').then((response) => {
       setBooksList(response.data)
     });
   }, []);
+
+  const [updateTitle, setupdateBookTitle] = useState("");
+  const [updateIsbn, setupdateIsbn] = useState("");
+  const [updateBookNumber, setupdateBookNumber] = useState("");
+  const [updatePublishedDate, setupdatePublishedDate] = useState("");
+  const [updateAuthor, setupdateBookAuthor] = useState("");
+  const [updateGenre, setupdateBookGenre] = useState("");
+  const [updateDescription, setupdateDescription] = useState("");
+  const updatebook = (Id) => {
+    Axios.put('http://localhost:3001/api/updatebook', {
+      id:Id,
+      title: updateTitle,
+    }).then((err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result)
+      }
+    });
+  };
+  /**  useEffect(() => {
+      Axios.get('http://localhost:3001/api/getupdatebook').then((response) => {
+        setBookList(response.data);
+      });
+    }, []);
+**/
+
+
+  const deleteBook = (Id) => {
+    Axios.delete(`http://localhost:3001/api/deletebook/${Id}`).then(() => {
+      alert('Book deleted');
+    });
+  }
+
   return (
     <div>
       <Header />
@@ -155,19 +192,19 @@ function Admin() {
                       {
                         booksList.map((book) => {
                           return (
-                          <tr>
-                            <th scope="row">{book.id}</th>
-                            <td>{book.booktitle}</td>
-                            <td>{book.bookisbn}</td>
-                            <td>{book.bookgenre}</td>
-                            <td>{book.booknumber}</td>
-                            <td>{book.publisheddate}</td>
-                            <td>{book.bookauthor}</td>
-                            <td>{book.description}</td>
-                            <td style={{ width: "30px" }}><i class="fa-solid fa-circle-info text-secondary"></i></td>
-                            <td style={{ width: "30px" }}><i class="fa-solid fa-pen-to-square text-primary"></i></td>
-                            <td style={{ width: "30px" }}><i class="fa-solid fa-trash-can text-danger"></i></td>
-                          </tr>
+                            <tr>
+                              <th scope="row">{book.id}</th>
+                              <td>{book.booktitle}</td>
+                              <td>{book.bookisbn}</td>
+                              <td>{book.bookgenre}</td>
+                              <td>{book.booknumber}</td>
+                              <td>{book.publisheddate}</td>
+                              <td>{book.bookauthor}</td>
+                              <td>{book.bookdescription}</td>
+                              <td style={{ width: "30px" }}><i class="fa-solid fa-circle-info text-secondary"></i></td>
+                              <td style={{ width: "30px" }}><Link to={`/Updatebook/${book.id}`}><i class="fa-solid fa-pen-to-square text-primary">up</i></Link></td>
+                              <td style={{ width: "30px" }}><i class="fa-solid fa-trash-can text-danger" onClick={() => deleteBook(book.id)}></i></td>
+                            </tr>
                           )
                         })
                       }
@@ -394,6 +431,8 @@ function Admin() {
 
 
 
+           
+      
 
       </Mainlayout>
 

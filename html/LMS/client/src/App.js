@@ -2,10 +2,22 @@ import React, { Component, useState, useEffect } from 'react';
 import Axios from 'axios';
 import logo from './logo.svg';
 import './App.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from './components/Footer';
 
 function App(){
+
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const navigate =useNavigate();
+  const login = () => {
+      Axios.post('http://localhost:3001/api/login',{
+        LoginEmail: loginEmail,
+        LoginPassword: loginPassword,
+      }).then(() => {
+        navigate('/Admin')
+      });
+  };
 
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
@@ -118,11 +130,11 @@ function App(){
               <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57" />
 
               <div class="form-floating">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
+                <input type="email" onChange={(e) => setLoginEmail(e.target.value)} class="form-control" id="floatingInput" placeholder="name@example.com" />
                 <label for="floatingInput">Email address</label>
               </div><br />
               <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" />
+                <input type="password" onChange={(e) => setLoginPassword(e.target.value)} class="form-control" id="floatingPassword" placeholder="Password" />
                 <label for="floatingPassword">Password</label>
               </div>
 
@@ -132,7 +144,7 @@ function App(){
                   Remember me
                 </label>
               </div>
-              <Link to="/Home" className='nav-a btn p-color w-100 py-2'>Sign in</Link>
+              <button onClick={login} className='nav-a btn p-color w-100 py-2'>Sign in</button>
               <p class="mt-5 mb-3 text-body-secondary">Don't have Account? <b><span class="signup-btn btn" data-bs-toggle="modal" data-bs-target="#signupmodal">Sign up</span></b></p>
             </form>
           </div>
