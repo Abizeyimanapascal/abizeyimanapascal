@@ -23,7 +23,7 @@ function Home() {
           {
             book.map((book) => {
               return (
-
+                
                 <div class="card book p-3 border-0">
                   <svg class="bd-placeholder-img card-img-top" width="100%" height="180"
                     xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap"
@@ -33,7 +33,7 @@ function Home() {
                       dy=".3em">Image cap</text>
                   </svg>
                   <div class="card-body">
-                    <h5 class="card-title">{book.booktitle}</h5>
+                    <h5 class="card-title">{book.booktitle}<div class="badge badge-warning">{book.booknumber}</div></h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                       the card's content.</p>
                     <a href="#" class="btn btn-primary">Go somewhere</a>

@@ -1,0 +1,14 @@
+{
+    "homelink":{
+        "text": "Home"
+    },
+    "about-uslink":{
+        "text": "About-Us"
+    },
+    "faqlink":{
+        "text": "FAQs"
+    },
+    "helplink":{
+        "text": "Help"
+    }
+}

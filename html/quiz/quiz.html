@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Quiz App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            
+        }
+
+        .quiz-container {
+            background: #fff;
+            width: 90%;
+            max-width: 600px;
+            margin: 100px auto 0;
+            border: 1px solid gray;
+            border-radius: 10px;
+            padding: 40px;
+        }
+
+        .question {
+            padding: 20px 0px 15px 0px;
+            font-weight: bold;
+        }
+
+        .options {
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #prevBtn {
+            display: none;
+        }
+
+        .highlight {
+            background-color: #f0f0f0;
+        }
+
+        .result {
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="quiz-container">
+        <div id="progress" style="float: left;width: 50%;">Question <span id="current-question">1</span> of <span id="total-questions">3</span></div>
+        <div id="timer" style="float: right;width: 50%;text-align: right;">Time Left: <span id="time">30</span> seconds</div>
+        <br>
+        <div id="quiz">
+            <div class="question" id="question">Question Placeholder</div>
+            <div class="options" id="options">
+                <input type="radio" name="answer" id="option1" value="0">
+                <label for="option1" id="label1">Option 1</label><br>
+                <input type="radio" name="answer" id="option2" value="1">
+                <label for="option2" id="label2">Option 2</label><br>
+                <input type="radio" name="answer" id="option3" value="2">
+                <label for="option3" id="label3">Option 3</label><br>
+                <input type="radio" name="answer" id="option4" value="3">
+                <label for="option4" id="label4">Option 4</label><br>
+            </div>
+            <button class="btn" id="prevBtn" onclick="prevQuestion()">Previous</button>
+            <button class="btn" id="nextBtn" onclick="nextQuestion()">Next</button>
+        </div>
+        <div class="result" id="result">
+            <div id="message"></div>
+            <div id="marks"></div>
+            <button class="btn" onclick="closeQuiz()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What is the capital of France?",
+                options: ["London", "Paris", "Berlin", "Rome"],
+                correctAnswer: 1,
+                userAnswer: null
+            },
+            {
+                question: "Which planet is known as the Red Planet?",
+                options: ["Earth", "Mars", "Jupiter", "Venus"],
+                correctAnswer: 1,
+                userAnswer: null
+            },
+            {
+                question: "What is the chemical symbol for water?",
+                options: ["H2O", "CO2", "NaCl", "O2"],
+                correctAnswer: 0,
+                userAnswer: null
+            },
+            {
+                question: "What is the smallest country?",
+                options: ["Rwanda", "USA", "Uganda", "Vatican City"],
+                correctAnswer: 3,
+                userAnswer: null
+            }
+        ];
+
+        let currentQuestion = 0;
+        let marks = 0;
+        let timer = 30;
+        let intervalId;
+
+        function loadQuestion() {
+            clearInterval(intervalId); // Clear any previous timer
+            intervalId = setInterval(updateTimer, 1000);
+
+            const questionElement = document.getElementById('question');
+            const optionsElement = document.getElementById('options');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const resultContainer = document.getElementById('result');
+
+            const progressText = document.getElementById('current-question');
+            const totalQuestionsText = document.getElementById('total-questions');
+            progressText.textContent = currentQuestion + 1;
+            totalQuestionsText.textContent = questions.length;
+
+            if (currentQuestion < questions.length) {
+                resultContainer.style.display = 'none';
+                const questionObj = questions[currentQuestion];
+                questionElement.textContent = questionObj.question;
+
+                optionsElement.innerHTML = '';
+
+                questionObj.options.forEach((option, index) => {
+                    const input = document.createElement('input');
+                    input.type = 'radio';
+                    input.name = 'answer';
+                    input.id = `option${index + 1}`;
+                    input.value = index;
+                    if (questionObj.userAnswer !== null && index === questionObj.userAnswer) {
+                        input.checked = true; // Highlight previously selected answer
+                    }
+                    optionsElement.appendChild(input);
+
+                    const label = document.createElement('label');
+                    label.htmlFor = `option${index + 1}`;
+                    label.textContent = option;
+                    label.id = `label${index + 1}`;
+                    optionsElement.appendChild(label);
+
+                    optionsElement.appendChild(document.createElement('br'));
+                });
+
+                prevBtn.style.display = (currentQuestion === 0) ? 'none' : 'inline-block';
+                nextBtn.textContent = (currentQuestion === questions.length - 1) ? 'Submit' : 'Next';
+            } else {
+                // Quiz is finished
+                resultContainer.style.display = 'block';
+                document.getElementById('quiz').style.display = 'none';
+                const messageElement = document.getElementById('message');
+                const marksElement = document.getElementById('marks');
+                const passMark = (marks / questions.length) * 100;
+
+                if (passMark >= 70) {
+                    messageElement.textContent = 'Congratulations! You passed the quiz.';
+                    messageElement.style.color = 'green';
+                } else {
+                    messageElement.textContent = 'Sorry! You failed the quiz.';
+                    messageElement.style.color = 'red';
+                }
+
+                marksElement.textContent = `Your score: ${marks}/${questions.length}`;
+            }
+        }
+
+        function nextQuestion() {
+            const selectedOption = document.querySelector('input[name="answer"]:checked');
+            if (!selectedOption) {
+                alert('Please select an option.');
+                return;
+            }
+
+            const selectedAnswer = parseInt(selectedOption.value);
+            const questionObj = questions[currentQuestion];
+
+            if (questionObj.userAnswer === null) {
+                // Count points only if user's answer is not recorded yet
+                const correctAnswer = questionObj.correctAnswer;
+                if (selectedAnswer === correctAnswer) {
+                    marks++;
+                }
+            }
+
+            questionObj.userAnswer = selectedAnswer; // Store user's answer
+
+            currentQuestion++;
+            loadQuestion();
+        }
+
+        function prevQuestion() {
+            currentQuestion--;
+            if (currentQuestion < 0) {
+                currentQuestion = 0;
+            }
+            loadQuestion();
+        }
+
+        function updateTimer() {
+            const timeElement = document.getElementById('time');
+            timer--;
+            timeElement.textContent = timer;
+            if (timer === 0) {
+                clearInterval(intervalId);
+                alert('Time\'s up!');
+                document.getElementById('quiz').style.display = 'none';
+                document.getElementById('timer').style.display = 'none';
+                document.getElementById('result').style.display = 'block';
+                nextQuestion();
+            }
+        }
+
+        function closeQuiz() {
+            document.getElementById('result').style.display = 'none';
+        }
+
+        window.onload = loadQuestion;
+    </script>
+
+</body>
+
+</html>

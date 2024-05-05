@@ -202,8 +202,8 @@ function Admin() {
                               <td>{book.bookauthor}</td>
                               <td>{book.bookdescription}</td>
                               <td style={{ width: "30px" }}><i class="fa-solid fa-circle-info text-secondary"></i></td>
-                              <td style={{ width: "30px" }}><Link to={`/Updatebook/${book.id}`}><i class="fa-solid fa-pen-to-square text-primary">up</i></Link></td>
-                              <td style={{ width: "30px" }}><i class="fa-solid fa-trash-can text-danger" onClick={() => deleteBook(book.id)}></i></td>
+                              <td style={{ width: "30px" }}><Link to={`/Updatebook/${book.id}`}><i class="fa-solid fa-pen-to-square text-primary"></i></Link></td>
+                              <td style={{ width: "30px" }}><i class="fa-solid fa-trash-can text-danger" onClick={() => {return-confirm('Delete ?'),deleteBook(book.id)}}></i></td>
                             </tr>
                           )
                         })
