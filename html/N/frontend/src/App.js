@@ -9,13 +9,11 @@ function App() {
 
       <Header></Header>
 
-      <main class="container">
+      <main class="container" style={{ padding: "0px 120px 0px 120px" }}>
         <nav class="d-flex justify-content-center bg-body-tertiary rounded row">
           <div className='col-2'>
           </div>
-          <div className='col-1'>
-          </div>
-          <div className='col-4'>
+          <div className='col-5'>
             <nav>
               <div class="nav nav-tabs mb-3 justify-content-center" id="nav-tab" role="tablist">
                 <button class="nav-link color active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
@@ -24,8 +22,8 @@ function App() {
                   type="button" role="tab" aria-controls="nav-aboutus" aria-selected="false">About-Us</button>
                 <button class="nav-link color" id="nav-faqs-tab" data-bs-toggle="tab" data-bs-target="#nav-books"
                   type="button" role="tab" aria-controls="nav-books" aria-selected="false">FAQs</button>
-                <button class="nav-link color" id="nav-help-tab" data-bs-toggle="tab" data-bs-target="#nav-borrowers"
-                  type="button" role="tab" aria-controls="nav-borrowers" aria-selected="false">Help</button>
+                <button class="nav-link color" id="nav-contactus-tab" data-bs-toggle="tab" data-bs-target="#nav-contactus"
+                  type="button" role="tab" aria-controls="nav-contactus" aria-selected="false">Contact Us</button>
               </div>
             </nav>
           </div>
@@ -38,11 +36,11 @@ function App() {
           </div>
           <div className='col-2'></div>
         </nav>
-
+        <br />
         <div class="tab-content" id="nav-tabContent">
           <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 
-            <div class="container my-5">
+            <div class="container">
               <div class="p-5 text-center rounded-3 bgcolor">
                 <h3 class="text-white">Urubuga Rwambere Mu Rwanda Rufasha Abantu Bose Kubona Provisoire!</h3><hr></hr>
                 <p class="col-lg-8 mx-auto fs-5 text-muted">
@@ -59,7 +57,7 @@ function App() {
                 </div>
               </div>
             </div>
-
+            <br /><br />
             <div class="row">
               <div class="col-2"></div>
               <div class="col-2 text-center"><img src="./images/books.jpg" class="homeimageicon" /></div>
@@ -84,20 +82,100 @@ function App() {
           </div>
 
           <div class="tab-pane fade show text-muted" id="nav-aboutus" role="tabpanel" aria-labelledby="nav-aboutus-tab">
-          <br/><br/><b>Abo turibo.</b><br/><br/>
+            <br /><b>Abo turibo.</b><br /><br />
 
             Nockira ni urubuga rwashyiriweho gufasha abanyarwanda Bose kumenya amategeko y'umuhanda mu rwego rwo kwirinda impanuka ziterwa no kutamenya amategeko agenga uburyo bwo kugenda mu muhanda. Ariko cyane cyane tunafasha abashaka kubona uruhushya rw'agateganyo rwo gutwara ibinyabiziga (Provisoire)
 
-            <br/><br/><b>Service dutanga:</b><br/><br/>
+            <br /><br /><b>Service dutanga:</b><br /><br />
             <ul>
-            <li>Kwigisha amategeko y'umuhanda mu buryo bwo gusoma igazeti.</li>
-            <li>Kwigisha amategeko y'umuhanda mu majwi.</li>
-            <li>Gutanga imyitozo ifasha umunyeshuri kwihugura.</li>
-            <li>Gutanga Ibibazo n'ibisubizo uwiga yaba akoresha</li>
-            <li>Kwigisha ibyapa neza ukabyiga ubibona</li>
-            <li>Kwigisha ibimenyetso byo mu muhanda, n'ibimenyetso bimurika (Feruje) ukabyiga neza kandi ubibona.</li>
-            <li>Gutanga inama n'amakuru y'ingenzi byafasha umunyeshuri gutsindira uruhushya rw'agateganyo (Provisoire) cyangwa uruhushya rwa burundu (Permit)</li>
+              <li>Kwigisha amategeko y'umuhanda mu buryo bwo gusoma igazeti.</li>
+              <li>Kwigisha amategeko y'umuhanda mu majwi.</li>
+              <li>Gutanga imyitozo ifasha umunyeshuri kwihugura.</li>
+              <li>Gutanga Ibibazo n'ibisubizo uwiga yaba akoresha</li>
+              <li>Kwigisha ibyapa neza ukabyiga ubibona</li>
+              <li>Kwigisha ibimenyetso byo mu muhanda, n'ibimenyetso bimurika (Feruje) ukabyiga neza kandi ubibona.</li>
+              <li>Gutanga inama n'amakuru y'ingenzi byafasha umunyeshuri gutsindira uruhushya rw'agateganyo (Provisoire) cyangwa uruhushya rwa burundu (Permit)</li>
             </ul>
+          </div>
+
+
+          <div class="tab-pane fade show text-muted" id="nav-contactus" role="tabpanel" aria-labelledby="nav-contactus-tab">
+            <br />
+
+            <div class="row">
+
+              <div class="col-sm-4 border rounded bgcolor text-light" style={{ fontWeight: "bold" }}>
+                <br />
+                Imyirondoro yacu.<br />
+                Reka tumenye niba hari icyo utekereza mu byo utwandikira.<br /><br /><br />
+
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone-call"><path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> +250 789 117 171<br />
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> nockiradrivingschool@gmail.com<br />
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Rwanda<br />
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> www.nockira.com
+              <div style={{background:"yellow"}}>hi</div>
+              </div>
+
+              <div class="col-sm-8">
+                <b><center>Abo turibo.</center></b><br />
+
+                <form class="row g-3 needs-validation" novalidate>
+                  <div class="col-md-6">
+                    <label for="validationCustom01" class="form-label">First name:</label>
+                    <input type="text" name="Firstname" class="form-control" id="validationCustom01" />
+                    <div class="valid-feedback">
+                      Looks good!
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="validationCustom02" class="form-label">Last name:</label>
+                    <input type="text" name="Lastname" class="form-control" id="validationCustom02" />
+                    <div class="valid-feedback">
+                      Looks good!
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="validationCustomUsername" class="form-label">Username:</label>
+                    <div class="input-group has-validation">
+                      <span class="input-group-text" id="inputGroupPrepend">@</span>
+                      <input type="text" name="Username" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" />
+                      <div class="invalid-feedback">
+                        Please choose a username.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="validationCustom03" class="form-label">e-mail:</label>
+                    <input type="text" name="Email" class="form-control" id="validationCustom03" />
+                    <div class="invalid-feedback">
+                      Please provide a valid city.
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <label for="validationCustom05" class="form-label">Password:</label>
+                    <textarea class="form-control" rows="3">
+
+                    </textarea>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="invalidCheck" />
+                      <label class="form-check-label" for="invalidCheck">
+                        Agree to terms and conditions
+                      </label>
+                      <div class="invalid-feedback">
+                        You must agree before submitting.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <button class="btn bgcolor text-light" type="submit"><b>Submit</b></button>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+
           </div>
 
         </div>

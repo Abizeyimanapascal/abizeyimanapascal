@@ -8,7 +8,7 @@ function Mainlayout(props) {
     <div>
       <Header></Header>
 
-      <div class="container">
+      <div class="container" style={{padding:"0px 120px 0px 120px"}}>
 
         <div class="row">
 

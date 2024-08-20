@@ -1,9 +1,17 @@
 
 .bgcolor{
+    background-color:#2fd873;
+    color: white;
+}
+.bgcolor:hover{
     background-color:#03D357;
+    color: white;
 }
 .color{
-    color: #03D357;
+    color: #2fd873;
+}
+.color:hover{
+    color: green;
 }
 .homeimageicon{
     width: 50%;
