@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 4</title>
+    <style>
+        .converter{
+            background: rgb(197, 196, 196);
+            width: 30%;
+            margin-left: 30%;
+            height: 600px;
+            padding-left: 2%;
+            padding-right: 2%;
+            color: rgb(93, 92, 92);
+        }
+        .header{
+            text-align: center;
+            font-size: 20px;
+            padding: 20px;
+        }
+        table{
+            width: 100%;
+            text-align: center;
+        }
+        table tr{
+            height: 80px;
+        }
+        #amount, #currency, #rate{
+            width: 100%;
+            height: 30px;
+            padding: 0px;
+            border: none;
+        }
+        #convert{
+            width: 100%;
+            height: 40px;
+            background:#007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        #result{
+            background: black;
+            height: 100px;
+            color: white;
+            padding: 3%;
+        }
+    </style>
+</head>
+<body>
+   
+    <div class="converter">
+        <div class="header">Currency Converter APP</div>
+
+        <table>
+            <tr>
+                <td style="width: 30%;">Enter Amount IN FRW</td>
+                <td><input type="text" id="amount"></td>
+            </tr>
+
+            <tr>
+                <td>Select Currency</td>
+                <td><select id="currency">
+                    <option value=""></option>
+                    <option value="USD">USD</option>
+                    <option value="EURO">EURO</option>
+                    <option value=""></option>
+                </select></td>
+            </tr>
+
+            <tr style="top:160px;">
+                <td>Rate</td>
+                <td><input type="text" id="rate"></td>
+            </tr>
+
+            <tr>
+                <td colspan="2"><button id="convert" onclick="convert()">CONVERT</button></td>
+            </tr>
+        </table>
+        Result
+        <div id="result">
+            Result Here ....
+        </div>
+        
+    </div>
+
+
+    <script>
+        // Function to handle currency conversion
+        function convert() {
+            // Get input values
+            var amount = parseFloat(document.getElementById("amount").value);
+            var currency = document.getElementById("currency").value;
+            var rate = parseFloat(document.getElementById("rate").value);
+    
+            // Perform conversion
+            var convertedAmount;
+            if (currency === "USD") {
+                convertedAmount = amount * rate;
+            } else if (currency === "EURO") {
+                convertedAmount = amount * rate;
+            } else {
+                // Invalid or empty currency selected
+                alert("Please select a valid currency");
+                return;
+            }
+    
+            // Display result
+            document.getElementById("result").innerHTML = "Converted Amount: " + convertedAmount.toFixed(2) + " " + currency;
+        }
+    </script>
+    
+
+</body>
+</html>

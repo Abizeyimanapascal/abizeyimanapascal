@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 4</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+   
+    <div class="converter">
+        <div class="header">Currency Converter APP</div>
+
+        <table>
+            <tr>
+                <td style="width: 30%;">Enter Amount IN FRW</td>
+                <td><input type="text" id="amount"></td>
+            </tr>
+
+            <tr>
+                <td>Select Currency</td>
+                <td><select id="currency">
+                    <option value=""></option>
+                    <option value="USD">USD</option>
+                    <option value="EURO">EURO</option>
+                    <option value=""></option>
+                </select></td>
+            </tr>
+
+            <tr style="top:160px;">
+                <td>Rate</td>
+                <td><input type="text" id="rate"></td>
+            </tr>
+
+            <tr>
+                <td colspan="2"><button id="convert" onclick="convert()">CONVERT</button></td>
+            </tr>
+        </table>
+        Result
+        <div id="result">
+            Result Here ....
+        </div>
+        
+    </div>
+
+
+    <script src="script.js"></script>
+    
+
+</body>
+</html>

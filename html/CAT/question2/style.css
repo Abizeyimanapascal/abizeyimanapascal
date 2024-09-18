@@ -1,0 +1,27 @@
+table {
+    position: absolute;
+    left: 200px;
+    height: 10px;
+}
+
+select {
+    width: 64px;
+}
+
+.table2 {
+    position: absolute;
+    left: 200px;
+    top: 660px;
+}
+
+.table3 {
+    position: absolute;
+    left: 200px;
+    top: 820px;
+}
+
+div {
+    position: absolute;
+    left: 570px;
+    top: 870px;
+}
