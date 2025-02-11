@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        console.log("Hi this is the async app");
+        const Barista1 = () =>{
+            console.log("Hi, welcome");     
+        }
+        const Customer1 = () =>{
+            setTimeout(() => {
+                console.log("Thanks, Can I have a cup of coffee?");
+            }, 1000);     
+        }
+
+        const Barista2 = () =>{
+            setTimeout(() => {
+                console.log("Sure, G'me 5 sec");
+            }, 2000);     
+        }
+        const Customer2 = () =>{
+            setTimeout(() => {
+                console.log("Yeah");
+            }, 2000);     
+        }
+        const Calling = () =>{
+            setTimeout(()=>console.log("Calling someone"),3000)
+        }
+        const Barista3 = () =>{
+            return new Promise((resolve, reject) => {
+                setTimeout(()=>{
+                    const x = true;
+                if (x) {
+                    resolve("here you go");
+                } else {
+                    reject("Sorry");
+                    
+                }
+                }, 5000)
+            })
+        }
+        const coffeeshop = async () =>{
+            console.log(await Barista3());
+        }
+        setTimeout(() => {
+            console.log("Thank you");
+            
+        }, 7000);
+        Barista1()
+        Customer1()
+        Barista2()
+        Customer2()
+        coffeeshop()
+        Calling()        
+    </script>
+</body>
+</html>

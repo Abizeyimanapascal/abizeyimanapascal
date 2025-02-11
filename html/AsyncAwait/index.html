@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AsyncAwait</title>
+</head>
+
+<body>
+    <script>
+        const order = () => console.log("Order a coffee ...");
+        const baristaMessage = () => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    const message = true;
+                    if (message) {
+                        resolve("Coffee is ready")
+                    } else {
+                        reject("Coffee is not ready")
+                    }
+                }, 2000);
+            })
+        }
+        const coffeeshop = async () => {
+            try {
+                order();
+                console.log(await baristaMessage());
+                console.log("Enjoy")
+            } catch (err) {
+                console.error("Error :", err)
+            }
+        }
+        coffeeshop();
+    </script>
+</body>
+
+</html>
