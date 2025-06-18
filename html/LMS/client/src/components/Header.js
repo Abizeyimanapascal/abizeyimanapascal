@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
 export class Header extends Component {
     render() {
         return (
@@ -43,15 +42,16 @@ export class Header extends Component {
                 <div className='col-4'>
                     <ul class="navbar-nav justify-content-center">
                         
+                        <li class="nav-item  mx-4">
+                        <Link to="/Dashboard" className='nav-a'>Dashboard</Link>
+                        </li>
                         <li class="nav-item mx-4">
                             <Link to="/Home" className='nav-a'>Home</Link>
                         </li>
                         <li class="nav-item  mx-4">
                         <Link to="/Admin" className='nav-a'>Admin</Link>
                         </li>
-                        <li class="nav-item  mx-4">
-                        <Link to="/Dashboard" className='nav-a'>Dashboard</Link>
-                        </li>
+
                     </ul>
                 </div>
             </div>

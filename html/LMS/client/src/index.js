@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
-import Home from './pages/Home';
-import Admin from './pages/Admin';
-import Dashboard from './pages/Dashboard';
-import Updatebook from './pages/Updatebook';
+import Home from './Home';
+import Admin from './Admin';
+import Dashboard from './Dashboard';
+import Updatebook from './Updatebook';
 
 import { createBrowserRouter,RouterProvider } from "react-router-dom";
 

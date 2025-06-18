@@ -1,13 +1,21 @@
-const express = require('express')
+const express = require('express');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-
 const app = express();
 
+app.use(cors());
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
+app.get('/api/test', (req, res) => {
+    res.json({ message: 'Backend is working!' });
+});
+
 app.listen(3001, () => {
-    console.log('listening on port 3001')
+    console.log('Listening on port 3001');
 });
 
 
@@ -18,9 +26,6 @@ const db = mysql.createPool({
     database: 'library'
 });
 
-app.use(cors());
-app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.post('/api/login', (req, res) => {
